@@ -24,6 +24,30 @@
         };
     };
 
+    macros {
+        delete_word: delete_word {
+            label = "delete_word";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp BSPC>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
+    
+        forward_delete_word: forward_delete_word {
+            label = "forward_delete_word";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp DEL>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
+    };
+
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer {
@@ -55,7 +79,7 @@
             bindings = <
         //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
         //│ INSERT   │  1       │  2       │  3       │          │   │ HOME     | PAGE DN  | PAGE UP  │ END      │  :       │
-            &kp INS    &kp N1     &kp N2     &kp N3     &trans         &kp HOME  &kp PG_DN  &kp PG_UP   &kp END    &kp COLON
+            &kp INS    &kp N1     &kp N2     &kp N3     &trans         &kp HOME    &none      &none     &kp END   &kp COLON
         //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
         //│ DELETE   │  4       │  5       │  6       │          │   │ LEFT     │ DOWN     │ UP       │ RIGHT    │  ;       │
             &kp DEL    &kp N4     &kp N5     &kp N6     &trans         &kp LARW   &kp DARW   &kp UARW    &kp RARW   &kp SEMI
@@ -80,7 +104,8 @@
         //│          │          │          │          │          │   │  &       │  _       │  +       │  │       │          │
             &trans     &trans     &trans     &trans     &trans         &kp AMPS   &kp UNDER  &kp PLUS   &kp PIPE   &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                             &trans     &trans         &trans     &trans
+//                                                                  macro ctrl+BSPC macro ctrl+DELETE
+                                             &trans     &trans       &delete_word    &forward_delete_word
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
@@ -99,40 +124,6 @@
             &trans     &trans     &trans    &bt BT_CLR &bt BT_SEL 2    &trans     &trans     &trans     &trans     &trans
         //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
                                              &trans     &trans         &trans     &trans
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-            >;
-        };
-        
-        gaming_layer {
-            bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  Q       │  W       │  E       │  R       │   │  layer 0 │          │          │          │          │
-            &kp Q      &kp Q      &kp W      &kp E      &kp R           &to 0      &none      &none      &none      &none
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Shift   │  A       │  S       │  D       │  F       │   │          │          │          │          │          │
-            &kp LSHFT   &kp A     &kp  S     &kp D     &kp F            &none      &none      &none      &none      &none
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Z       │  X       │  C       │  V       │  B       │   │          │          │          │          │          │
-            &kp Z      &kp X      &kp C      &kp V      &kp B           &none      &none      &none      &none      &none
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 5 ESC   &kp SPACE      &none     &none
-        //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
-            >;
-        };
-
-        gaming_layer_function {
-            bindings = <
-        //╭──────────┬──────────┬──────────┬──────────┬──────────╮   ╭──────────┬──────────┬──────────┬──────────┬──────────╮
-        //│  Q       │  Q       │  W       │  E       │  R       │   │  layer 0 │          │          │          │          │
-            &trans     &kp N3      &kp N4     &kp N5     &kp N6           &to 0      &none      &none      &none      &none
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  Shift   │  A       │  S       │  D       │  =       │   │          │          │          │          │          │
-            &trans     &trans     &trans     &trans     &kp EQUAL            &none      &none      &none      &none      &none
-        //├──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┤
-        //│  F1      │  F2      │  F3      │  F4      │  F5      │   │  F6      │  F7      │  F8      │  F9      │          │
-            &kp F1     &kp F2      &kp F3     &kp F4     &kp F5         &kp F6    &kp F7      &kp F8     &kp F9      &none
-        //╰──────────┴──────────┴──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┴──────────┴──────────╯
-                                            &lt 5 ESC   &kp SPACE      &none     &none
         //                                 ╰──────────┴──────────╯   ╰──────────┴──────────╯
             >;
         };
