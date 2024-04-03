@@ -1,0 +1,13 @@
+file_format: "1"
+id: splittyboi
+name: SPLITTYBOI
+type: shield
+url: 
+requires: [pro_micro]
+exposes: [i2c_oled]
+features:
+  - keys
+  - display
+siblings:
+  - splittyboi_left
+  - splittyboi_right
