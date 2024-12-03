@@ -5,12 +5,14 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include "unicorny40-layouts.dtsi"
 
 / {
     chosen {
         zephyr,display = &oled;
         zmk,kscan = &kscan0;
-        zmk,matrix_transform = &default_transform;
+        zmk,physical-layout = &unicorny40_physical_layout;
+        //zmk,matrix_transform = &default_transform;
     };
 
     default_transform: keymap_transform_0 {
