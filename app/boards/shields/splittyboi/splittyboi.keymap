@@ -104,7 +104,7 @@
                        &trans     &trans     &trans    &trans      &trans        &trans      &trans      &trans     &trans     &trans
         //╭──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────╮
         //           │ RESET    │          │          │          │PROFILE 0 │   │          │          │          │          │  RESET   │          │
-            &trans     &sys_reset   &trans     &trans    &trans   &bt BT_SEL 0    &trans    &trans  &ext_power EP_TOG &trans  &sys_reset  &trans
+            &trans     &sys_reset   &trans     &trans    &trans   &bt BT_SEL 0  &studio_unlock  &trans  &ext_power EP_TOG &trans  &sys_reset  &trans
         //╭──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤   ├──────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
         //│  SHIFT   │BOOTLOADER│          │          │          │PROFILE 1 │   │          │          │          │          │BOOTLOADER│  SHIFT   │
            &trans     &bootloader  &trans     &trans     &trans    &bt BT_SEL 1    &trans     &trans     &trans     &trans   &bootloader   &trans 
