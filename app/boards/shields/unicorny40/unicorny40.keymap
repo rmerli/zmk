@@ -32,12 +32,29 @@
         };
     };
 
-    combos {
-        compatible = "zmk,combos";
+    macros{
+        ZMK_MACRO(nvim_save,
+            wait-ms = <10>;
+            tap-ms = <20>;
+            bindings = <&kp COLON &kp W &kp ENTER>;
+            )
 
-        combo_delete_word {
-            bindings = <&kp LC(BACKSPACE)>;
-            key-positions = <34 37>;
+        ZMK_MACRO(nvim_quit,
+            wait-ms = <10>;
+            tap-ms = <20>;
+            bindings = <&kp COLON &kp Q &kp ENTER>;
+            )
+
+        tmux_leader: tmux_leader{
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <20>;
+            bindings 
+            = <&macro_press &kp LCTRL>
+            , <&macro_tap &kp A>
+            , <&macro_release &kp LCTRL>
+            ;
         };
     };
 
@@ -111,6 +128,14 @@
                                               &none      &trans      &trans          &trans     &trans     &none
         //                                 ╰──────────┴──────────┴──────────╯   ╰──────────┴──────────┴──────────╯
             >;
+        };
+
+        extra1 {
+            status = "reserved";
+        };
+
+        extra2 {
+            status = "reserved";
         };
         
     };
