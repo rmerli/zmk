@@ -26,16 +26,25 @@
 
     macros {
         ZMK_MACRO(nvim_save,
-            wait-ms = <30>;
-            tap-ms = <40>;
+            wait-ms = <10>;
+            tap-ms = <20>;
             bindings = <&kp COLON  &kp W &kp ENTER>;
         )
     
         ZMK_MACRO(quit_nvim,
-            wait-ms = <30>;
-            tap-ms = <40>;
+            wait-ms = <10>;
+            tap-ms = <20>;
             bindings = <&kp COLON  &kp Q &kp ENTER>;
         )
+        tmux_prefix: tmux_prefix {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LCTRL>
+                , <&macro_tap &kp A>
+                , <&macro_release &kp LCTRL>
+                ;
+        };
     };
 
     conditional_layers {
